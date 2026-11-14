@@ -118,7 +118,13 @@ class BlowViewModel(app: Application) : AndroidViewModel(app) {
 
     /** 실제 Pleos 내비 지도 화면을 띄운다. */
     fun openNaviMap() {
-        if (naviSource?.showMap() != true) _state.update { it.copy(error = "내비 지도를 열 수 없어요") }
+        if (naviSource?.showMap() == true) return
+        // 데모 주행 중처럼 내비와 연결이 없을 때는 Pleos 내비 앱을 그냥 앞으로 띄운다
+        val ctx = getApplication<Application>()
+        ctx.packageManager.getLaunchIntentForPackage(PLEOS_NAVI_PACKAGE)
+            ?.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+            ?.let(ctx::startActivity)
+            ?: _state.update { it.copy(error = "내비 지도를 열 수 없어요") }
     }
 
     /** 길안내 시작 제안에 대한 답. 수락하면 경로 위 음악 도로를 준비했다고 알린다. */
@@ -154,7 +160,7 @@ class BlowViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch { player.blowOut() }
         _state.update {
             it.copy(
-                sourceLabel = null, zone = null, nowPlaying = null, playingZone = null, artwork = null,
+                sourceLabel = null, zone = null, nowPlaying = null, playingZone = null, artwork = null, guide = null,
                 djLine = null, canGuide = false, guidingTo = null,
             )
         }
@@ -233,6 +239,10 @@ class BlowViewModel(app: Application) : AndroidViewModel(app) {
             player.finished()
             _state.update { if (it.nowPlaying?.id == track.id) it.copy(nowPlaying = null, playingZone = null, artwork = null) else it }
         }
+    }
+
+    private companion object {
+        const val PLEOS_NAVI_PACKAGE = "ai.umos.maps.android.navigation.app"
     }
 
     override fun onCleared() {

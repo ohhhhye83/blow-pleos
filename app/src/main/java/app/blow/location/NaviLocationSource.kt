@@ -43,6 +43,8 @@ class NaviLocationSource(
 
     private fun publishGuide() {
         val t = tbt ?: return
+        // 안내가 끝난 뒤 내비가 0으로 채운 값을 보내는 경우 — 안내 없음으로 본다
+        if ((remainMeters ?: 0) <= 0) return clearGuide()
         val turn = when (t.type) {
             TurnType.TURN_ARRIVE -> NaviGuide.Turn.ARRIVE
             TurnType.TURN_UTURN -> NaviGuide.Turn.UTURN
