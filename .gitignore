@@ -1,0 +1,17 @@
+.gradle/
+.kotlin/
+build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+*.keystore
+!apk/*.apk
+# Pixabay 음원 — 단독 재배포 금지 라이선스라 저장소에 올리지 않음 (scripts/fetch-music.sh 로 받기)
+app/src/main/assets/music/*.mp3
+
+# 접수양식(개인정보 기입본이 섞이지 않도록 저장소에 올리지 않음)
+docs/submission/
