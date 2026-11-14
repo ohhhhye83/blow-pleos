@@ -145,7 +145,7 @@ Blow는 지금 달리는 도로와 그 순간의 날씨에 맞춰, 운전자가 
 
 - GitHub 저장소 (소스 코드 + APK): https://github.com/ohhhhye83/blow-pleos
   - APK: https://github.com/ohhhhye83/blow-pleos/releases/tag/v1.0
-- 시연 영상: 【링크 기입】
+- 시연 영상: https://youtu.be/Z9Pe65mXMNM
 - 근거 자료 출처
   - KT지니뮤직 차량 음악 이용 데이터: https://www.sedaily.com/article/14054290
   - 차량 실내 활동 연구(2017): https://koreascience.kr/article/JAKO201812471214971.pdf
